@@ -1,0 +1,120 @@
+<div class="container mt-3">
+  <div class="card">
+    <div class="card-body">
+
+      <!-- Table Section -->
+      <table *ngIf="produits" class="table table-striped table-hover ">
+        <!-- Table Header -->
+        <thead class="table-dark">
+        <tr>
+          <th>idProduit</th>
+          <th>marque</th>
+          <th>description</th>
+          <th>prix</th>
+          <th>quantite</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody>
+        <tr *ngFor="let a of produits">
+          <td>{{a.idProduit}}</td>
+          <td>{{a.marque}}</td>
+          <td>{{a.description}}</td>
+          <td>{{a.prix}}</td>
+          <td>{{a.quantite}}</td>
+          <td>
+            <button class="btn btn-outline-success me-2" (click)="recupereProd(a)" data-bs-toggle="modal" data-bs-target="#updateForm">Update</button>
+            <button class="btn btn-outline-danger" (click)="confirmDelete(a)" data-bs-toggle="modal">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- Button to activate the add form -->
+      <div class="text-center m-3">
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addForm">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Update Form Modal -->
+<div class="modal fade" id="updateForm" tabindex="-1" aria-labelledby="updateFormLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form (ngSubmit)="updateProduct(upd)" #upd="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Marque</label>
+            <input type="text" class="form-control" [(ngModel)]="test.marque" placeholder="Enter marque" name="marque" aria-describedby="marque">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="test.description" placeholder="Enter description" name="description" aria-describedby="description">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Prix</label>
+            <input type="number" class="form-control" [(ngModel)]="test.prix" placeholder="Enter prix" name="prix" aria-describedby="prix">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Quantite</label>
+            <input type="number" class="form-control" [(ngModel)]="test.quantite" placeholder="Enter quantite" name="quantite" aria-describedby="quantite">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Form Modal -->
+<div class="modal fade" id="addForm" tabindex="-1" aria-labelledby="addFormLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form (ngSubmit)="addProduit(add)" #add="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Marque</label>
+            <input type="text" class="form-control" [(ngModel)]="test.marque" placeholder="Enter marque" name="marque" aria-describedby="marque" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" class="form-control" [(ngModel)]="test.description" placeholder="Enter description" name="description" aria-describedby="description" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Prix</label>
+            <input type="number" class="form-control" [(ngModel)]="test.prix" placeholder="Enter prix" name="prix" aria-describedby="prix" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Quantite</label>
+            <input type="number" class="form-control" [(ngModel)]="test.quantite" placeholder="Enter quantite" name="quantite" aria-describedby="quantite" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

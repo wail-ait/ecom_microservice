@@ -1,0 +1,141 @@
+<div class="container p-3">
+  <div class="card">
+    <div class="card-body">
+
+      <!-- Table Section -->
+      <table *ngIf="ventes" class="table table-striped table-hover">
+        <!-- Table Header -->
+        <thead class="table-dark">
+        <tr>
+          <th>id_Vente</th>
+          <th>nom_Acheteur</th>
+          <th>marque_Produit</th>
+          <th>quantite</th>
+          <th>mois</th>
+          <th>annee</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+
+        <!-- Table Body -->
+        <tbody>
+        <tr *ngFor="let a of ventes">
+          <td>{{a.id_Vente}}</td>
+          <td>{{a.acheteur.nom}}</td>
+          <td>{{a.produit.marque}}</td>
+          <td>{{a.quantite}}</td>
+          <td>{{a.mois}}</td>
+          <td>{{a.annee}}</td>
+          <td>
+            <button class="btn btn-outline-success me-2" (click)="recupereVente(a)" data-bs-toggle="modal" data-bs-target="#updateForm">Update</button>
+            <button class="btn btn-outline-danger" (click)="confirmDelete(a)" data-bs-toggle="modal">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <!-- Button to activate the add form -->
+      <div class="text-center m-3">
+        <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#addForm">Add</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Update Form Modal -->
+<div class="modal fade" id="updateForm" tabindex="-1" aria-labelledby="updateFormLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form (ngSubmit)="updateVente(upd)" #upd="ngForm">
+          <div class="mb-3">
+            <label class="form-label">quantite</label>
+            <input type="number" class="form-control" [(ngModel)]="test.quantite" placeholder="Enter quantite" name="quantite" aria-describedby="quantite">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">mois</label>
+            <input type="number" class="form-control" [(ngModel)]="test.mois" placeholder="Enter mois" name="mois" aria-describedby="mois">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">annee</label>
+            <input type="number" class="form-control" [(ngModel)]="test.annee" placeholder="Enter annee" name="annee" aria-describedby="annee">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Add Form Modal -->
+<div class="modal fade" id="addForm" tabindex="-1" aria-labelledby="addFormLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form (ngSubmit)="addVente(add)" #add="ngForm">
+          <!--<div class="mb-3">
+            <label class="form-label">id Acheteur</label>
+            <input type="number" class="form-control" [(ngModel)]="test.id_Acheteur" placeholder="Enter id_Acheteur" name="id_Acheteur" aria-describedby="id_Acheteur" required>
+          </div>
+          -->
+
+          <div>
+            <label>Choose an acheteur:</label>
+
+            <select name="id_Acheteur" class="form-control" [(ngModel)]="test.id_Acheteur" required>
+              <option  *ngFor="let a of acheteurs" [value]="a.id_Acheteur">{{a.nom}} </option>
+            </select>
+          </div>
+
+          <div>
+            <label>Choose an produit:</label>
+
+            <select name="id_Produit" class="form-control" [(ngModel)]="test.id_Produit" required>
+              <option  *ngFor="let p of produits" [value]="p.idProduit">{{p.marque}} </option>
+            </select>
+          </div>
+
+          <!--<div class="mb-3">
+            <label class="form-label">id Produit</label>
+            <input type="number" class="form-control" [(ngModel)]="test.id_Produit" placeholder="Enter id_Produit" name="id_Produit" aria-describedby="id_Produit" required>
+          </div>-->
+
+          <div class="mb-3">
+            <label class="form-label">quantite</label>
+            <input type="number" class="form-control" [(ngModel)]="test.quantite" placeholder="Enter quantite" name="quantite" aria-describedby="quantite" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">mois</label>
+            <input type="number" class="form-control" [(ngModel)]="test.mois" placeholder="Enter mois" name="mois" aria-describedby="mois" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">annee</label>
+            <input type="number" class="form-control" [(ngModel)]="test.annee" placeholder="Enter annee" name="annee" aria-describedby="annee" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
